@@ -23,7 +23,7 @@ function Accordion() {
         }
     ]
 
-    const [activeIndex, setIndex] = useState(null);
+    const [activeIndex, setIndex] = useState(0);
 
     const toggleAccordion = (index) => {
         setIndex((preValue) => {
