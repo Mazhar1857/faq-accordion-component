@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './accordion.css';
 import iconStar from './assets/icon-star.svg';
 import iconPlus from './assets/icon-plus.svg';
@@ -20,17 +20,48 @@ function Accordion() {
         {
             question: 'How can I get help if I\'m stuck on a challenge?',
             answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi explicabo magnam sint debitis maxime, vitae minima mollitia maiores beatae omnis magni ea aspernatur? Quod?'
-        }
+        },
+      
     ]
 
-    const [activeIndex, setIndex] = useState(0);
 
+    const [activeIndex, setIndex] = useState(faq.map((item) => ({ ...item, isActive: false })));
     const toggleAccordion = (index) => {
-        setIndex((preValue) => {
-            return preValue === index ? null : index;
+        setIndex((prevActiveIndex) => {
+            return prevActiveIndex.map((item, idx) => {
+                return idx === index ? { ...item, isActive: !item.isActive } : item;
+            });
+        });
+    };
 
-        })
-    }
+
+    // const [activeIndex, setIndex] = useState(faq.map((item) => (false)));
+
+    // const toggleAccordion = (index) => {
+    //     const updatedIndex = [...activeIndex];
+
+    //     for (let i = 0; i < activeIndex.length; i++) {
+    //         if (i === index) {
+    //             updatedIndex[i] = !updatedIndex[i];
+    //         }
+    //     }
+    //     setIndex(updatedIndex);
+    // };
+
+
+    // const toggleAccordion = (index) => {
+    //     const updatedIndex = [...activeIndex];
+
+    //     for (let i = 0; i < faq.length; i++) {
+    //         if (i === index) {
+    //             updatedIndex[i] = { ...updatedIndex[i], isActive: !updatedIndex[i].isActive };
+    //         }
+    //     }
+    //     setIndex(updatedIndex);
+    // };
+
+
+
 
 
     return (
@@ -46,9 +77,9 @@ function Accordion() {
                         <li className='accordion-list'>
                             <div className='accordion-question' onClick={() => { toggleAccordion(index) }}>
                                 <h2>{item.question}</h2>
-                                <img src={activeIndex === index ? iconMinus : iconPlus} alt="" />
+                                <img src={activeIndex[index].isActive === true ? iconMinus : iconPlus} alt="" />
                             </div>
-                            <div className={`accordion-answer ${activeIndex === index ? 'visible' : ''}`}>
+                            <div className={`accordion-answer ${activeIndex[index].isActive === true ? 'visible' : ''}`}>
                                 <div >
                                     {item.answer}
                                 </div>
