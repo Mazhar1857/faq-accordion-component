@@ -3,27 +3,8 @@ import './accordion.css';
 import iconStar from './assets/icon-star.svg';
 import iconPlus from './assets/icon-plus.svg';
 import iconMinus from './assets/icon-minus.svg';
+import { faq } from './data.js';
 function Accordion() {
-    const faq = [
-        {
-            question: 'What is Frontend and how will it help me?',
-            answer: 'Frontend Mentor offers realistic coding challenges to help developers improve their frontend coding skills with projects in HTML, CSS, and JavaScript. It\'s suitable for all levels and ideal for portfolio building.'
-        },
-        {
-            question: 'Is Frontend Mentor free?',
-            answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi explicabo magnam sint debitis maxime, vitae minima mollitia maiores beatae omnis magni ea aspernatur? Quod?'
-        },
-        {
-            question: 'Can I use Frontend Mentor project inmy portfolio?',
-            answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi explicabo magnam sint debitis maxime, vitae minima mollitia maiores beatae omnis magni ea aspernatur? Quod?'
-        },
-        {
-            question: 'How can I get help if I\'m stuck on a challenge?',
-            answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus eligendi explicabo magnam sint debitis maxime, vitae minima mollitia maiores beatae omnis magni ea aspernatur? Quod?'
-        },
-      
-    ]
-
 
     const [activeIndex, setIndex] = useState(faq.map((item) => ({ ...item, isActive: false })));
     const toggleAccordion = (index) => {
@@ -33,35 +14,6 @@ function Accordion() {
             });
         });
     };
-
-
-    // const [activeIndex, setIndex] = useState(faq.map((item) => (false)));
-
-    // const toggleAccordion = (index) => {
-    //     const updatedIndex = [...activeIndex];
-
-    //     for (let i = 0; i < activeIndex.length; i++) {
-    //         if (i === index) {
-    //             updatedIndex[i] = !updatedIndex[i];
-    //         }
-    //     }
-    //     setIndex(updatedIndex);
-    // };
-
-
-    // const toggleAccordion = (index) => {
-    //     const updatedIndex = [...activeIndex];
-
-    //     for (let i = 0; i < faq.length; i++) {
-    //         if (i === index) {
-    //             updatedIndex[i] = { ...updatedIndex[i], isActive: !updatedIndex[i].isActive };
-    //         }
-    //     }
-    //     setIndex(updatedIndex);
-    // };
-
-
-
 
 
     return (
@@ -74,7 +26,7 @@ function Accordion() {
 
                 <ul >
                     {faq.map((item, index) => (
-                        <li className='accordion-list'>
+                        <li className='accordion-list' key={index}>
                             <div className='accordion-question' onClick={() => { toggleAccordion(index) }}>
                                 <h2>{item.question}</h2>
                                 <img src={activeIndex[index].isActive === true ? iconMinus : iconPlus} alt="" />
